@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato</title>
+    <link rel="stylesheet" href="/styles/header.css">
+    <link rel="stylesheet" href="/styles/toast.css">
+</head>
+<body>
+
+    <!-- toast hidden by default until triggered -->
+    <div id="toast" class="toast" style="display: none;">
+        <span class="icon">❗</span>
+        <span class="message">User already exists</span>
+        <span class="close" onclick="closeToast()">&times;</span>
+        <div class="progress"></div>
+      </div>
+      
+    <!-- sign up pop up hidden by default -->
+     <div class="position-sign-up-cont" id="sign-up-container">
+        <div class="sign-up-container" id="sign-up-container">
+            <form action="/signup" method="post">
+                <div class="grp">
+                    <div>Sign Up</div>
+                    <div>
+                        <img src="/images/frontend_assets/cross_icon.png" onclick="closePopup()" alt="close-icon">
+                    </div>
+                </div>
+    
+                <input type="text" placeholder="Your name" id="name" name="name" required>
+                <input type="email" placeholder="Your Email" id="email" name="email" required>
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                <!-- <input type="button" value="Create account"> -->
+                <button type="submit" value="Submit">Create account</button>
+                <div class="checkbox-cont">
+                    <input type="checkbox" id="checkbox" required="true">
+                    <div>By continuing, i agree to the terms of use and privacy policy</div>
+                </div>
+                <div>Already have an account? <a onclick="showLoginPage()">Login here</a></div>
+            </form>
+         </div>
+     </div>
+
+     <!-- login-page -->
+     <div class="position-sign-up-cont" id="log-in-container">
+        <div class="sign-up-container log-in-cont" id="log-in-container">
+            <form action="/login" method="post">
+                <div class="grp">
+                    <div>Login</div>
+                    <div>
+                        <img src="/images/frontend_assets/cross_icon.png" onclick="closePopup()" alt="close-icon">
+                    </div>
+                </div>
+    
+                <!-- <input type="text" placeholder="Your name" id="name"> -->
+                <input type="email" placeholder="Your Email" id="email" name="email" required>
+                <input type="password" placeholder="Password" id="password" name="password" required>
+                <!-- <input type="button" value="Login" id="login-btn"> -->
+                <button type="submit" value="Submit" id="login-btn">Log in</button>
+                <div class="checkbox-cont">
+                    <input type="checkbox" id="checkbox" required="true">
+                    <div>By continuing, i agree to the terms of use and privacy policy</div>
+                </div>
+                <div>Sign up instead? <a onclick="showSignUpPage()">Sign Up</a></div>
+            </form>
+         </div>
+     </div>
+     
+     <!-- nav bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="/images/frontend_assets/logo.png" alt="logo">
+            </div>
+
+            
+            <div class="right-nav" id="right-nav">
+
+        <!-- there was a problem here - adding a link to the basket icon
+        caused the nav bar layout to be fucked so i had to create two
+        separate nav bars one for when the user is logged out and another
+            when the user is logged in -->
+
+                <% if (user) { %>
+                <img src="/images/frontend_assets/search_icon.png" alt="search_icon">
+                    <img src="/images/frontend_assets/dot.png" alt="dot_icon" id="dot-icon">
+                    <a href="/cart" id="basket-link">
+                        <img src="/images/frontend_assets/basket_icon.png" alt="basket_icon" id="basket_icon">
+                    </a>
+
+                    <% } else { %>
+                        <div class="right-nav-2">
+                            <img src="/images/frontend_assets/search_icon.png" alt="search_icon" id="search-icon-2">
+                            <img src="/images/frontend_assets/dot.png" alt="dot_icon" id="dot-icon">
+                            <a href="/cart" id="basket-link basket-link-2">
+                                <img src="/images/frontend_assets/basket_icon.png" alt="basket_icon" id="basket-icon-2">
+                            </a>
+                            <div class="sign-in-btn-cont">
+                                <input type="button" value="sign in" id="sign-in-btn" onclick="openPopup()">
+                            </div>
+                        </div>
+                        
+                        <% } %>
+                        
+                <!-- show account icon if logged in -->
+                <% if (user) { %>
+                    <div class="account-dropdown">
+                        <button id="account-btn">
+                            <img src="/images/frontend_assets/profile_icon.png" alt="profile-icon" id="profile-icon" class="profile-icon">
+                        </button>
+                        <div id="dropdown-menu" class="dropdown-content">
+                            <p>👤 <%= user.name %></p>
+                            <a href="/my-orders">📝 My Orders</a>
+                            <a href="/settings">⚙️ Account Settings</a>
+                            <a href="/logout">🚪 Logout</a>
+                          </div>
+                        </div>
+
+                    <!-- else show the signin button -->
+                <% } else { %> 
+                <% } %>
+
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero-container">
+        <section class="hero">
+            <img src="/images/frontend_assets/header_img.png" alt="header_img">
+            <div class="overlay">
+                <div id="order-text">Order your favourite<br>food here</div>
+                <div id="overlay-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis fugiat molestiae impedit<br>
+                    velit magnam voluptatem, beatae, delectus amet, vel aperiam ratione dolore! Corrupti quaerat<br>
+                     doloribus similique, at saepe laboriosam magni!</div>
+                <input type="button" value="View Menu" id="view-menu-btn">
+            </div>
+        </section>
+    </div>
+
+    <section class="section-services">
+        <div>Explore our menu</div>
+        <p id="section-services-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex vitae eum iusto molestias facere facere.
+            dolorum, quibusdam enim minus adipisci, facilis nfjesa boyur facere.</p>
+        <div class="food-menu">
+            <div>
+                <img src="/images/frontend_assets/menu_1.png" alt="menu_1">
+                <p>Salad</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_2.png" alt="menu_2">
+                <p>Rolls</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_3.png" alt="menu_3">
+                <p>Desserts</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_4.png" alt="menu_4">
+                <p>Sandwich</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_5.png" alt="menu_5">
+                <p>Cake</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_6.png" alt="menu_6">
+                <p>Pure Veg</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_7.png" alt="menu_7">
+                <p>Pasta</p>
+            </div>
+            <div>
+                <img src="/images/frontend_assets/menu_8.png" alt="menu_8">
+                <p>Noodles</p>
+            </div>
+        </div>
+        <hr>
+    </section>
+
+    <section class="dishes-near-you">
+        <div>Top dishes near you</div>
+
+        <div class="dishes">
+
+            <!-- this section isnt working -->
+            <div class="dishes-1-fix">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_1.png" alt="food-1" class="dishes-img">
+                    
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white-loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white">
+                        <% } %>
+                </div>
+                
+                <div class="dishes-1-cont greek-salad">
+                    <div class="dishes-1-grp-2">
+                        <div>Greek Salad</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$12</div>
+                </div>
+            </div> 
+            <!-- fucking line wont work and i cant remove 
+                 it cos it fuck up my code
+             so i set it to display none -->
+            
+            
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_2.png" alt="food-1" class="dishes-img">
+                    
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                            
+                            <!-- Repeat as needed with same class names -->                                 
+                </div>
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Veg Salad</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$27</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_3.png" alt="food-1" class="dishes-img">
+
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                </div>
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Clover Salad</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$20</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_4.png" alt="food-1" class="dishes-img">
+                    
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                </div>
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Chicken Salad</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$10</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_5.png" alt="food-1" class="dishes-img">
+                    
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                </div>
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Lasagna Rolls</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$12</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_6.png" alt="food-1" class="dishes-img">
+
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                </div>
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Per Peri Rolls</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$16</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_7.png" alt="food-1" class="dishes-img">
+
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %> 
+                        
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                    </div>
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Chicken Rolls</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$21</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_8.png" alt="food-1" class="dishes-img">
+
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                    </div>
+
+                
+                <div class="dishes-1-cont">
+                    <div class="dishes-1-grp-2">
+                        <div>Veg Rolls</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$19</div>
+                </div>
+            </div>
+
+            <div class="all-dishes">
+                <div class="dishes-1-grp-1 dishes-1-grp-all">
+                    <img src="/images/frontend_assets/food_1.png" alt="food-1" class="dishes-img">
+
+                    <% if (!user) { %>
+                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
+                        <% } else { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                            <% } %>
+
+                            <div class="incr-decr-product-quantity">
+                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                <div class="food-quantity">1</div>
+                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                            </div>
+                    </div>
+                
+                <div class="dishes-1-cont greek-salad">
+                    <div class="dishes-1-grp-2">
+                        <div>Greek Salad</div>
+                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    </div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
+                    <div class="price-tag">$12</div>
+                </div>
+            </div>
+            
+    </section>
+
+    <div class="app-promo">
+        <div>For Better Experience Download<br>Tomato App</div>
+        <div><img src="/images/frontend_assets/play_store.png" alt="play_store">
+             <img src="/images/frontend_assets/app_store.png" alt="app-store"></div>
+    </div>
+
+    <div class="footer-container">
+        <footer>
+
+            <div>
+                <div class="footer-logo">
+                    <img src="/images/frontend_assets/logo.png" alt="logo">
+                </div>
+                <div id="footer-1-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis fugiat molestiae impedit<br>
+                    velit magnam voluptatem, beatae, delectus amet, vel aperiam ratione dolore! Corrupti<br>
+                     doloribus similique, at saepe laboriosam magni!</div>
+                <div class="social-icons">
+                     <img src="/images/frontend_assets/facebook_icon.png" alt="facebook_icon">
+                     <img src="/images/frontend_assets/twitter_icon.png" alt="twitter_icon">
+                     <img src="/images/frontend_assets/linkedin_icon.png" alt="linkedin_icon">
+                </div>
+            </div>
+
+            <div class="footer-2">
+                <div>COMPANY</div>
+                <div>Home</div>
+                <div>About us</div>
+                <div>Delivery</div>
+                <div>Privacy Policy</div>
+            </div>
+
+            <div class="footer-3">
+                <div>GET IN TOUCH</div>
+                <div>+1-212-4550-7890</div>
+                <div>contact.niggerstack.dev</div>
+            </div>
+
+        </footer>
+
+        <hr id="footer-line">
+        <div id="copyright-text">Copyright 2025 ©️ Tomato.com - All Right Reserved.</div>
+        <div class="invincible-line"></div>
+    </div>
+
+    
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.has('showLogin')) {
+        document.getElementById('log-in-container').style.display = 'flex';
+    }
+
+    if (params.has('showSignup')) {
+        document.getElementById('sign-up-container').style.display = 'flex';
+    }
+
+    if (params.has('userExists')) {
+        showToast("User already exists");
+    }
+
+    if (params.has('incorrectDetails')) {
+        showToast("Incorect email or password");
+    }
+
+    // if (params.has('loginSuccesful')) {
+    //     document.getElementById('sign-in-btn').style.display = 'none';
+    //     document.getElementById('profile-icon').style.display = 'flex';
+    //     window.history.pushState({}, '', '/'); // resets the url when i close the popup
+
+    //     // document.getElementsById('right-nav').style.gap = "9rem";
+        
+    // }
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.querySelector(".message").textContent = message;
+        toast.style.display = "flex";
+
+        const progress = toast.querySelector(".progress");
+        progress.style.animation = "none";
+        void progress.offsetWidth; // Restart animation
+        progress.style.animation = "progressBar 3s linear forwards";
+
+        setTimeout(() => {
+        toast.style.display = "none";
+        }, 3000);
+    }
+
+    function closeToast() {
+        document.getElementById("toast").style.display = "none";
+    }  
+</script>
+
+<script>
+      function showIncr_decr_product_quantity(event) {
+        const container = event.target.closest(".dishes-1-grp-1");
+        const incrDecr = container.querySelector(".incr-decr-product-quantity");
+        const addIcon = container.querySelector(".add_icon_white");
+
+        incrDecr.style.display = "flex";
+        addIcon.style.display = "none";
+
+        document.getElementById("dot-icon").style.display = "flex" 
+        // display the dot icon on the basket icon 
+        // to indicate a food has been added to cart
+    }
+</script>
+
+<script>
+    document.querySelectorAll(".incr-decr-product-quantity").forEach((container) => {
+      const quantityEl = container.querySelector(".food-quantity");
+      const addBtn = container.querySelector(".add_icon_green");
+      const removeBtn = container.querySelector(".remove_icon_red");
+  
+      addBtn.addEventListener("click", () => {
+        let quantity = parseInt(quantityEl.textContent);
+        quantity++;
+        quantityEl.textContent = quantity;
+      });
+  
+      removeBtn.addEventListener("click", () => {
+        let quantity = parseInt(quantityEl.textContent);
+        if (quantity > 1) {
+          quantity--;
+          quantityEl.textContent = quantity;
+        }
+      });
+    });
+  </script>
+  
+  
+    
+    <script src="/javascripts/signin_popup.js"></script>
+    <script src="/javascripts/drop_down_menu.js"></script>
+
+</body>
+
+</html>
