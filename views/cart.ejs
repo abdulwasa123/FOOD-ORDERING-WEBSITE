@@ -1,0 +1,69 @@
+<%- include("partials/header.ejs") %>
+
+
+<div class="cart-product-container">
+    <img src="/images/frontend_assets/food_1.png" alt="food_1">
+
+    <div class="cart-prod">
+        <div class="prod-title">
+            <div>Title:</div>
+            <div>Greek Salad</div>
+        </div>
+
+        <div class="prod-price">
+            <div>Price:</div>
+            <div>$12</div>
+        </div>
+    
+        <div class="prod-quantity">
+            <div>Quantity:</div>
+            <div>2</div>
+        </div>
+    
+        <div class="prod-total">
+            <div>Total:</div>
+            <div>$21</div>
+        </div>
+
+        <div class="remove-prod">
+            <div>Remove</div>
+            <div>x</div>
+        </div>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="cart-totals">
+
+    <div>Cart Totals</div>
+
+        <div class="prod-subtotal">
+            <div>Subtotal</div>
+            <div>$20</div>
+        </div>
+    <hr>
+        <div class="prod-delivery-fee">
+            <div>Delivery Fee</div>
+            <div>$3</div>
+        </div>
+    <hr>
+        <div class="cart-total">
+            <div>Total</div>
+            <div>$23</div>
+        </div>
+
+        <a href="/order">
+            <button type="submit" value="Submit">PROCEED TO CHECKOUT</button>
+        </a>
+        
+</div>
+
+<%- include("partials/footer.ejs") %>
+
+<script src="/javascripts/drop_down_menu.js"></script>
+
+</body>
+
+</html>

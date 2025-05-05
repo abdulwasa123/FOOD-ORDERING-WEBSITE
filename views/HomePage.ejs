@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tomato</title>
-    <link rel="stylesheet" href="/styles/header.css">
-    <link rel="stylesheet" href="/styles/toast.css">
-</head>
-<body>
+<!-- boiler-plate code was here -->
+<%- include("partials/header.ejs") %>
 
     <!-- toast hidden by default until triggered -->
     <div id="toast" class="toast" style="display: none;">
@@ -67,64 +59,7 @@
          </div>
      </div>
      
-     <!-- nav bar -->
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="/images/frontend_assets/logo.png" alt="logo">
-            </div>
-
-            
-            <div class="right-nav" id="right-nav">
-
-        <!-- there was a problem here - adding a link to the basket icon
-        caused the nav bar layout to be fucked so i had to create two
-        separate nav bars one for when the user is logged out and another
-            when the user is logged in -->
-
-                <% if (user) { %>
-                <img src="/images/frontend_assets/search_icon.png" alt="search_icon">
-                    <img src="/images/frontend_assets/dot.png" alt="dot_icon" id="dot-icon">
-                    <a href="/cart" id="basket-link">
-                        <img src="/images/frontend_assets/basket_icon.png" alt="basket_icon" id="basket_icon">
-                    </a>
-
-                    <% } else { %>
-                        <div class="right-nav-2">
-                            <img src="/images/frontend_assets/search_icon.png" alt="search_icon" id="search-icon-2">
-                            <img src="/images/frontend_assets/dot.png" alt="dot_icon" id="dot-icon">
-                            <a href="/cart" id="basket-link basket-link-2">
-                                <img src="/images/frontend_assets/basket_icon.png" alt="basket_icon" id="basket-icon-2">
-                            </a>
-                            <div class="sign-in-btn-cont">
-                                <input type="button" value="sign in" id="sign-in-btn" onclick="openPopup()">
-                            </div>
-                        </div>
-                        
-                        <% } %>
-                        
-                <!-- show account icon if logged in -->
-                <% if (user) { %>
-                    <div class="account-dropdown">
-                        <button id="account-btn">
-                            <img src="/images/frontend_assets/profile_icon.png" alt="profile-icon" id="profile-icon" class="profile-icon">
-                        </button>
-                        <div id="dropdown-menu" class="dropdown-content">
-                            <p>👤 <%= user.name %></p>
-                            <a href="/my-orders">📝 My Orders</a>
-                            <a href="/settings">⚙️ Account Settings</a>
-                            <a href="/logout">🚪 Logout</a>
-                          </div>
-                        </div>
-
-                    <!-- else show the signin button -->
-                <% } else { %> 
-                <% } %>
-
-
-            </div>
-        </nav>
-    </header>
+     <!-- nav bar was here -->
 
     <div class="hero-container">
         <section class="hero">
@@ -134,12 +69,14 @@
                 <div id="overlay-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis fugiat molestiae impedit<br>
                     velit magnam voluptatem, beatae, delectus amet, vel aperiam ratione dolore! Corrupti quaerat<br>
                      doloribus similique, at saepe laboriosam magni!</div>
-                <input type="button" value="View Menu" id="view-menu-btn">
+                     <a href="#view-menu">
+                        <input type="button" value="View Menu" id="view-menu-btn">
+                     </a>
             </div>
         </section>
     </div>
 
-    <section class="section-services">
+    <section class="section-services" id="view-menu">
         <div>Explore our menu</div>
         <p id="section-services-paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex vitae eum iusto molestias facere facere.
             dolorum, quibusdam enim minus adipisci, facilis nfjesa boyur facere.</p>
@@ -439,43 +376,8 @@
              <img src="/images/frontend_assets/app_store.png" alt="app-store"></div>
     </div>
 
-    <div class="footer-container">
-        <footer>
-
-            <div>
-                <div class="footer-logo">
-                    <img src="/images/frontend_assets/logo.png" alt="logo">
-                </div>
-                <div id="footer-1-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis fugiat molestiae impedit<br>
-                    velit magnam voluptatem, beatae, delectus amet, vel aperiam ratione dolore! Corrupti<br>
-                     doloribus similique, at saepe laboriosam magni!</div>
-                <div class="social-icons">
-                     <img src="/images/frontend_assets/facebook_icon.png" alt="facebook_icon">
-                     <img src="/images/frontend_assets/twitter_icon.png" alt="twitter_icon">
-                     <img src="/images/frontend_assets/linkedin_icon.png" alt="linkedin_icon">
-                </div>
-            </div>
-
-            <div class="footer-2">
-                <div>COMPANY</div>
-                <div>Home</div>
-                <div>About us</div>
-                <div>Delivery</div>
-                <div>Privacy Policy</div>
-            </div>
-
-            <div class="footer-3">
-                <div>GET IN TOUCH</div>
-                <div>+1-212-4550-7890</div>
-                <div>contact.niggerstack.dev</div>
-            </div>
-
-        </footer>
-
-        <hr id="footer-line">
-        <div id="copyright-text">Copyright 2025 ©️ Tomato.com - All Right Reserved.</div>
-        <div class="invincible-line"></div>
-    </div>
+    <!-- footer was here -->
+    <%- include("partials/footer.ejs") %>
 
     
 <script>
@@ -496,15 +398,6 @@
     if (params.has('incorrectDetails')) {
         showToast("Incorect email or password");
     }
-
-    // if (params.has('loginSuccesful')) {
-    //     document.getElementById('sign-in-btn').style.display = 'none';
-    //     document.getElementById('profile-icon').style.display = 'flex';
-    //     window.history.pushState({}, '', '/'); // resets the url when i close the popup
-
-    //     // document.getElementsById('right-nav').style.gap = "9rem";
-        
-    // }
 
     function showToast(message) {
         const toast = document.getElementById("toast");

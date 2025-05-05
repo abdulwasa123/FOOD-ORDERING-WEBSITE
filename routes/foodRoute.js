@@ -4,5 +4,8 @@ const foodController = require("../controllers/foodController");
 const authMiddleware = require("../middleware/authMiddleware");
 
 router.get("/", foodController.renderHomePage);
+router.get("/cart", foodController.renderCartPage);
+router.get("/order", foodController.renderOrderPage);
+router.get("/myOrders", foodController.rendermyOrdersPage);
 
 module.exports = router;

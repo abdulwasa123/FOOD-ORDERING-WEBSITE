@@ -1,0 +1,58 @@
+.delivery-information{
+    max-width: 1200px;
+    padding: 20px 20px;
+    margin: 0 auto;
+}
+.zipCodeAndCountry, .cityAndState, .name{
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: row;
+}
+.zipCodeAndCountry input, .cityAndState input, .name input{
+    width: 100%;
+}
+
+.delivery-information form{
+    width: 100%;
+}
+#delivery-info-header{
+    font-family: 'facundo-bold';
+    font-size: 21px;
+    margin-bottom: 2rem;
+}
+.delivery-information input{
+    height: 2.1rem;
+    border-radius: 0.3rem;
+    border: 0.01px solid rgb(201, 195, 195);
+    font-family: "facundo-regular";
+    font-size: 13px;
+    padding-left: 0.5rem;
+    caret-color: rgb(253, 75, 10);
+    cursor: pointer;
+}
+.delivery-information input:focus{
+    outline: none;
+    border: 1px solid rgb(253, 75, 10);
+}
+
+
+@media (min-width: 1440px) {
+    .position-order-contents{
+        display: flex;
+        gap: 10rem;
+        max-width: 1200px;
+        padding: 20px 0px;
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+    .cart-totals{
+        width: 100%;
+        margin-top: -0.005rem;
+    }
+    .delivery-information{
+        width: 100%;
+    }
+    #delivery-info-header{
+        font-size: 26px;
+    }
+}

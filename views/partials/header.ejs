@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomato</title>
+    <link rel="stylesheet" href="/styles/HomePage.css">
+    <link rel="stylesheet" href="/styles/toast.css">
+    <link rel="stylesheet" href="/styles/cart.css">
+    <link rel="stylesheet" href="/styles/order.css">
+    <link rel="stylesheet" href="/styles/myOrders.css">
+</head>
+<body>
+    
+<!-- nav bar -->
+<header>
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="/images/frontend_assets/logo.png" alt="logo">
+            </a>
+        </div>
+
+        
+        <div class="right-nav" id="right-nav">
+
+    <!-- there was a problem here - adding a link to the basket icon
+    caused the nav bar layout to be fucked so i had to create two
+    separate nav bars one for when the user is logged out and another
+        when the user is logged in -->
+
+            <% if (user) { %>
+            <img src="/images/frontend_assets/search_icon.png" alt="search_icon">
+                <img src="/images/frontend_assets/dot.png" alt="dot_icon" id="dot-icon">
+                <a href="/cart" id="basket-link">
+                    <img src="/images/frontend_assets/basket_icon.png" alt="basket_icon" id="basket_icon">
+                </a>
+
+                <% } else { %>
+                    <div class="right-nav-2">
+                        <img src="/images/frontend_assets/search_icon.png" alt="search_icon" id="search-icon-2">
+                        <img src="/images/frontend_assets/dot.png" alt="dot_icon" id="dot-icon">
+                        <a href="/cart" id="basket-link basket-link-2">
+                            <img src="/images/frontend_assets/basket_icon.png" alt="basket_icon" id="basket-icon-2">
+                        </a>
+                        <div class="sign-in-btn-cont">
+                            <input type="button" value="sign in" id="sign-in-btn" onclick="openPopup()">
+                        </div>
+                    </div>
+                    
+                    <% } %>
+                    
+            <!-- show account icon if logged in -->
+            <% if (user) { %>
+                <div class="account-dropdown">
+                    <button id="account-btn">
+                        <img src="/images/frontend_assets/profile_icon.png" alt="profile-icon" id="profile-icon" class="profile-icon">
+                    </button>
+                    <div id="dropdown-menu" class="dropdown-content">
+                        <p>👤 <%= user.name %></p>
+                        <a href="/myOrders">📝 My Orders</a>
+                        <a href="/settings">⚙️ Account Settings</a>
+                        <a href="/logout">🚪 Logout</a>
+                      </div>
+                    </div>
+
+                <!-- else show the signin button -->
+            <% } else { %> 
+            <% } %>
+
+
+        </div>
+    </nav>
+</header>

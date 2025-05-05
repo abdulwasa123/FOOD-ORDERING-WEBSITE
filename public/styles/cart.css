@@ -1,0 +1,63 @@
+.cart-product-container{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 1200px;
+    padding: 20px 20px;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+.cart-product-container img{
+    width: 8rem;
+    height: 5.5rem;
+}
+.cart-prod{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+}
+hr{
+    max-width: 1200px;
+}
+.prod-title, .prod-price, .prod-quantity, .prod-total, .remove-prod{
+    display: flex;
+    justify-content: space-between;
+}
+.prod-total{
+    margin-bottom: 0.5rem;
+}
+.prod-title > div:first-child, .prod-price > div:first-child, .prod-quantity > div:first-child, .prod-total > div:first-child{
+    font-family: 'facundo-regular';
+}
+.remove-prod{
+    color: red;
+}
+
+.cart-totals{
+    max-width: 1200px;
+    padding: 20px 20px;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+.cart-totals > div:first-child{
+    margin-bottom: 1rem;
+    font-family: 'facundo-bold';
+    font-size: 21px;
+}
+.prod-subtotal, .prod-delivery-fee, .cart-total{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-family: 'facundo-regular';
+}
+.cart-totals button{
+    font-size: 12px;
+    width: 13.2rem;
+    height: 2.3rem;
+    border-radius: 0.2rem;
+    border: none;
+    color: white;
+    background-color: rgb(253, 75, 10);
+    font-family: 'facundo-semi-bold';
+}

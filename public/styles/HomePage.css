@@ -1,0 +1,660 @@
+@font-face {
+    font-family: 'facundo-semi-bold';
+    src: url('/fonts/Fontspring-DEMO-facundo-semibold.otf')
+format('opentype');
+}
+@font-face {
+    font-family: 'facundo-bold';
+    src: url('/fonts/Fontspring-DEMO-facundo-bold.otf')
+format('opentype');
+}
+@font-face {
+    font-family: 'facundo-regular';
+    src: url('/fonts/Fontspring-DEMO-facundo-regular.otf')
+format('opentype');
+}
+
+body,html{
+    margin: 0;
+    padding: 0;
+    font-family: 'facundo-semi-bold';
+    height: 100%;
+    scroll-behavior: smooth;
+}
+header{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px;
+}
+.navbar{
+    display: flex;
+    justify-content: space-between;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.logo img{
+    width: 7rem;
+    height: 1.4rem;
+}
+.right-nav{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2.3rem;
+}
+.right-nav img{
+    width: 20px;
+    height: 20px;
+}
+.right-nav img:nth-of-type(3){
+    margin-left: 0.5rem;
+    margin-top: 2rem;
+}
+#basket-link{
+    position: absolute;
+    margin-top: 0.4rem;
+    margin-right: 2.4rem;
+}
+#basket-link-2{
+    margin-left: -3rem;    
+}
+#search-icon-2, #basket-icon-2{
+    margin-top: 0.5rem;
+}
+.right-nav-2{
+    display: flex;
+    gap: 0.55rem;
+}
+
+.right-nav input{
+    background-color: transparent;
+    border-radius: 1.5rem;
+    border: 1px solid rgb(47, 46, 128);
+    height: 2.2rem;
+    width: 5rem;
+    color: rgb(47, 46, 128);
+}
+#dot-icon{
+    display: none;
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    margin-right: 2.2rem;
+    margin-top: -1.7rem;
+}
+
+/* profile-icon and drop-down code styling */
+.account-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .profile-icon {
+    cursor: pointer;
+    border-radius: 50%;
+    padding-top: 0.35rem;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .dropdown-content a,
+  .dropdown-content p {
+    color: #333;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f0f0f0;
+  }
+
+  #account-btn{
+    border: none;
+    background-color: transparent;
+  }
+  #account-btn img{
+    height: 23px;
+    width: 21px;
+    margin-top: -0.1rem;
+  }
+  
+
+.hero-container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px;
+}
+.hero{
+    position: relative;
+}
+.hero img{
+    width: 100%;
+}
+.hero .overlay{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+}
+.hero div{
+    color: #ffffff;
+    font-size: 20px;
+}
+.hero .overlay input{
+    width: 6rem;
+    background-color: #ffffff;
+    border-radius: 1.4rem;
+    border: none;
+    height: 1.9rem;
+    color: rgb(47, 46, 128);
+}
+.hero .overlay a{
+    width: 7rem;
+}
+
+.section-services{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
+.section-services > div:first-child{
+    font-size: 26px;
+    color: #000000;
+    font-family: 'facundo-bold';
+}
+.section-services p{
+    color: grey;
+    font-family: 'facundo-regular';
+}
+#section-services-paragraph{
+    margin-bottom: 1.5rem;
+    max-width: 790px;
+}
+.food-menu{
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    margin-bottom: 1.5rem;
+}
+.food-menu img{
+    width: 80px;
+}
+.food-menu::-webkit-scrollbar{
+    display: none;
+}
+.food-menu p{
+    text-align: center;
+}
+
+.dishes-near-you{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 20px;
+}
+.dishes{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    flex-flow: wrap;
+}
+.dishes-near-you > div:first-child{
+    font-size: 20px;
+    color: #000000;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: 'facundo-bold';
+}
+.dishes > div:first-child{
+    width: 200px;
+    height: 200px;
+}
+.dishes-img{
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    width: 18rem;
+}
+.dishes-1-grp-1{
+    display: flex;
+    position: relative;
+}
+.dishes-1-grp-1 > img:nth-of-type(2){
+    position: absolute;
+    bottom: 4%;
+    left: 118%;
+    width: 2.5rem;
+}
+.dishes-1-grp-all > img:nth-of-type(2){
+    left: 14.7rem;
+}/* for some unknown reasons the other dishes plus icon
+ didnt align so i had to add this line to rectify it */
+
+.dishes-1-grp-2{
+    display: flex;
+    width: 16.9rem;
+    justify-content: space-between;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+.dishes-1-grp-2 > div:first-child{
+    font-family: 'facundo-bold';
+    color: #161616;
+    padding-left: 1rem;
+    font-size: 17px;
+}
+.dishes-1-grp-2 img{
+    width: 4rem;
+    height: 13px;
+}
+.dishes-1-cont{
+    border: 1.8px solid;
+    border-color: rgb(235, 235, 220);
+    width: 17.8rem;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.dishes-1-cont p{
+    color: grey;
+    font-size: 11.4px;
+    padding-left: 1rem;
+}
+
+.price-tag{
+    padding-left: 1rem;
+    color: orangered;
+    margin-bottom: 1.5rem;
+}
+.dishes-1-fix{
+    display: none;
+} 
+/* wont make it work properly so set it display to none */
+
+.app-promo{
+    margin-top: 3rem;
+}
+.app-promo > div:first-child{
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-family: 'facundo-bold';
+}
+.app-promo > div:nth-of-type(2){
+   display: flex;
+   justify-content: center;
+   gap: 0.3rem;
+}
+.app-promo img{
+    width: 8.5rem;
+}
+
+footer{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    margin-top: 3.5rem;
+    font-family: 'facundo-regular';
+}
+.footer-container{
+    background-color: rgb(68, 67, 67);
+}
+#footer-1-text{
+    margin-top: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+footer > div:first-child{
+    margin-top: 2rem;
+}
+.footer-logo{
+    display: flex;
+    justify-content: center;
+    transition: all 0.3s ease;
+    width: 10rem;
+}
+.footer-logo-cont{
+    display: flex;
+    justify-content: center;
+}
+    
+.social-icons{
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+}
+.footer-2{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #ffffff;
+    text-align: center;
+}
+.footer-2 > div:first-child{
+    font-weight: bold;
+}
+.footer-3{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #ffffff;
+    text-align: center;
+}
+.footer-3 > div:first-child{
+    font-weight: bold;
+}
+#footer-line{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    margin-top: 2rem;
+}
+#copyright-text{
+    color: #ffffff;
+    text-align: center;
+    margin-top: 2rem;
+    font-family: 'facundo-regular';
+}
+.invincible-line{
+    height: 2rem;
+}
+#overlay-text{
+    display: none;
+    /* font-family: 'facundo-regular'; */
+}
+#order-text{
+    font-family: 'facundo-semi-bold';
+}
+.all-dishes{
+    /* box-shadow: 1px 1px 20px 1px rgb(254, 253, 253); */
+    transition: all 0.3s ease;
+}
+.all-dishes:hover{
+    cursor: pointer;
+    transform: scale(1.04);
+}
+
+#view-menu-btn:hover{
+    background-color: transparent;
+    border: 1px solid rgb(47, 46, 128);
+    color: #ffffff;
+    cursor: pointer;
+}
+#sign-in-btn:hover{
+    background-color: rgb(47, 46, 128);
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.logo:hover{
+    cursor: pointer;
+    transform: scale(1.06);
+}
+.footer-logo:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+/* form code/styling */
+.position-sign-up-cont{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    -webkit-backdrop-filter: brightness(60%);
+    backdrop-filter: brightness(60%);
+}
+.sign-up-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 23rem;
+    border: 1px solid rgb(185, 184, 184);
+    border-radius: 0.8rem;
+    font-family: "facundo-regular";
+    font-size: 13px;
+    background-color: white;
+}
+.sign-up-container .grp{
+    display: flex;
+    justify-content: space-between;
+}
+.grp img{
+    width: 15.5px;
+    cursor: pointer;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #ffffff;
+    width: 17.5rem;
+}
+form > div:first-child{
+    font-family: "facundo-bold";
+    font-size: 20px;
+}
+form > input, button{
+    height: 2.1rem;
+    border-radius: 0.3rem;
+    border: 0.01px solid rgb(201, 195, 195);
+    font-family: "facundo-regular";
+    font-size: 13px;
+    padding-left: 0.5rem;
+    caret-color: rgb(253, 75, 10);
+    cursor: pointer;
+}
+/* form::placeholder{
+    color: black;
+} */
+form > input:focus{
+    outline: none;
+    border: 1px solid rgb(253, 75, 10);
+}
+form > button{
+    color: #ffffff;
+    background-color: rgb(253, 75, 10);
+    border: none;
+}
+form a{
+    color: rgb(253, 75, 10);
+    text-decoration: none;
+    cursor: pointer;
+}
+.checkbox-cont{
+    display: flex;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+}
+.checkbox-cont input{
+    width: 10px;
+    margin-top: -0.84rem;
+    cursor: pointer;
+}
+.checkbox-cont div{
+    font-family: "facundo-regular";
+    font-size: 13px;
+}
+
+.log-in-cont{
+    height: 20rem;
+}
+
+.add_icon_white:hover{
+    border: 2px solid;
+    border-radius: 5rem;
+    border-color: rgb(253, 75, 10);
+}
+
+.incr-decr-product-quantity{
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: white;
+    width: 6rem;
+    height: 2.7rem;
+    border-radius: 2rem;
+    position: absolute;
+    margin-top: 10.7rem;
+    margin-left: 11.3rem;
+}
+.incr-decr-product-quantity img{
+    width: 2rem;
+    height: 2rem;
+}
+
+@media (min-width: 375px) {
+    .right-nav{
+        gap: 6rem;
+    }
+    .right-nav img{
+        width: 25px;
+        height: 25px;
+    }
+    #basket-link{
+        position: absolute;
+        margin-top: 0.4rem;
+        margin-right: 4.4rem;
+    }
+    #dot-icon{
+        display: none;
+        position: absolute;
+        width: 9.5px;
+        height: 9.5px;
+        margin-right: 4rem;
+        margin-top: -1.9rem;
+    }
+    #account-btn img{
+        height: 25px;
+        width: 23px;
+    }
+    .right-nav img:nth-of-type(3){
+        margin-left: 0;
+    }
+
+    /* second nav bar (logged out user) */
+    #basket-link-2{
+        margin-left: -3rem;    
+    }
+    #search-icon-2, #basket-icon-2{
+        margin-top: 0.35rem;
+    }
+    .right-nav-2{
+        display: flex;
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    /* app promo */
+    .app-promo > div:first-child{
+        font-size: 2.9rem;
+        margin-bottom: 2rem;
+    }
+    .app-promo img{
+        width: 9.5rem;
+        margin-bottom: 2rem;
+    }
+    .app-promo > div:nth-of-type(2){
+        gap: 2rem;
+    }
+    .dishes{
+        margin-bottom: 4.5rem;
+    }
+
+    /* footer */
+    footer{
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    .footer-2, .footer-3, #footer-1-text{
+        text-align: justify;
+    }
+    .footer-2, .footer-3{
+        margin-top: 4rem;
+    }
+    .footer-logo{
+        justify-content: flex-start;
+    }
+    .social-icons{
+        justify-content: flex-start;
+    }
+    footer > div:first-child{
+        margin-top: 3.8rem;
+    }
+    .footer-logo-cont{
+        display: flex;
+        justify-content: flex-start;
+    }
+    #order-text{
+        font-size: 3.3rem;
+    }
+    #overlay-text{
+        font-size: 11px;
+        display: block;
+    }
+    #section-services-paragraph{
+        font-size: 11px;
+    }
+    .hero .overlay input{
+        width: 7rem;
+        height: 2.2rem;
+    }
+    .hero .overlay{
+        gap: 1.3rem;
+    }
+    .dishes-near-you > div:first-child{
+        font-size: 27px;
+    }    
+}
+
+@media (min-width: 1024px) {
+    #order-text{
+        font-size: 4.5rem;
+    }
+    #section-services-paragraph{
+        font-size: 16px;
+    }
+    #overlay-text{
+        font-size: 16px;
+        display: block;
+    }
+    .hero .overlay input{
+        width: 7.5rem;
+        height: 2.7rem;
+    }
+    .hero .overlay{
+        gap: 1.5rem;
+    }
+}
