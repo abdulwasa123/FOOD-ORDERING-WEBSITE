@@ -62,6 +62,35 @@
 
 <%- include("partials/footer.ejs") %>
 
+<script>
+function updateCartUI(cart) {
+  const cartContainer = document.querySelector('.cart-product-container');
+  cartContainer.innerHTML = ''; // Clear existing
+
+  cart.items.forEach(item => {
+    const html = `
+      <div class="cart-product-container">
+        <img src="${item.foodId.image}" alt="food">
+        <div class="cart-prod">
+            <div class="prod-title"><div>Title:</div><div>${item.foodId.title}</div></div>
+            <div class="prod-price"><div>Price:</div><div>$${item.foodId.price}</div></div>
+            <div class="prod-quantity"><div>Quantity:</div><div>${item.quantity}</div></div>
+            <div class="prod-total"><div>Total:</div><div>$${item.total}</div></div>
+            <div class="remove-prod"><div>Remove</div><div>x</div></div>
+        </div>
+      </div>
+    `;
+    cartContainer.insertAdjacentHTML('beforeend', html);
+  });
+
+  // Update subtotal and total
+  const subtotal = cart.items.reduce((sum, item) => sum + item.total, 0);
+  document.querySelector('.prod-subtotal div:last-child').textContent = `$${subtotal}`;
+  document.querySelector('.cart-total div:last-child').textContent = `$${subtotal + 3}`;
+}
+
+</script>
+
 <script src="/javascripts/drop_down_menu.js"></script>
 
 </body>

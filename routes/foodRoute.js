@@ -8,4 +8,6 @@ router.get("/cart", foodController.renderCartPage);
 router.get("/order", foodController.renderOrderPage);
 router.get("/myOrders", foodController.rendermyOrdersPage);
 
+router.get('/images/:id', foodController.getImages);
+
 module.exports = router;

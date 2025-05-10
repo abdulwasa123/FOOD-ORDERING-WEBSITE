@@ -234,6 +234,7 @@ header{
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     width: 18rem;
+    height: 14rem;
 }
 .dishes-1-grp-1{
     display: flex;
@@ -261,7 +262,7 @@ header{
     font-family: 'facundo-bold';
     color: #161616;
     padding-left: 1rem;
-    font-size: 17px;
+    font-size: 13px;
 }
 .dishes-1-grp-2 img{
     width: 4rem;
@@ -278,6 +279,8 @@ header{
     color: grey;
     font-size: 11.4px;
     padding-left: 1rem;
+    padding-right: 1rem;
+    word-break: break-word;
 }
 
 .price-tag{

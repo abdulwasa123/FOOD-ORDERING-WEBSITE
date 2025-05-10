@@ -127,11 +127,8 @@
                 <div class="dishes-1-grp-1 dishes-1-grp-all">
                     <img src="/images/frontend_assets/food_1.png" alt="food-1" class="dishes-img">
                     
-                    <% if (!user) { %>
                         <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white-loggedin">
-                        <% } else { %>
                             <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white">
-                        <% } %>
                 </div>
                 
                 <div class="dishes-1-cont greek-salad">
@@ -147,11 +144,18 @@
                  it cos it fuck up my code
              so i set it to display none -->
             
-            
 
-            <div class="all-dishes">
+
+            <!-- first food code starts here -->
+
+            <!-- what i did here is that when the user is not logged in,
+              when u click on a food it shows the signin popup
+               (because the user must be logged in to order for food) -->
+             <% if (!user) { %>
+                <% foods.forEach(function(food) { %> <!-- create a new post and not let the previous one overrite the newer one -->
+            <div class="all-dishes" onclick="openPopup()">
                 <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_2.png" alt="food-1" class="dishes-img">
+                    <img src="/images/<%= food._id %>" alt="food-1" class="dishes-img">
                     
                     <% if (!user) { %>
                         <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
@@ -165,208 +169,54 @@
                                 <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
                             </div>
                             
-                            <!-- Repeat as needed with same class names -->                                 
                 </div>
                 
                 <div class="dishes-1-cont">
                     <div class="dishes-1-grp-2">
-                        <div>Veg Salad</div>
+                        <div><%= food.title %></div>
                         <img src="/images/frontend_assets/rating_starts.png" alt="rating">
                     </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$27</div>
+                    <p><%= food.description %></p>
+                    <div class="price-tag">$<%= food.price %></div>
                 </div>
             </div>
+            <%  }) %>
 
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_3.png" alt="food-1" class="dishes-img">
-
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                </div>
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div>Clover Salad</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$20</div>
-                </div>
-            </div>
-
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_4.png" alt="food-1" class="dishes-img">
-                    
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                </div>
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div>Chicken Salad</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$10</div>
-                </div>
-            </div>
-
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_5.png" alt="food-1" class="dishes-img">
-                    
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                </div>
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div>Lasagna Rolls</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$12</div>
-                </div>
-            </div>
-
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_6.png" alt="food-1" class="dishes-img">
-
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                </div>
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div>Per Peri Rolls</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$16</div>
-                </div>
-            </div>
-
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_7.png" alt="food-1" class="dishes-img">
-
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %> 
+            <!-- else, if the user is logged in, u can order -->
+            <% } else { %>
+                <% foods.forEach(function(food) { %> <!-- create a new post and not let the previous one overrite the newer one -->
+                <div class="all-dishes">
+                    <div class="dishes-1-grp-1 dishes-1-grp-all">
+                        <img src="/images/<%= food._id %>" alt="food-1" class="dishes-img">
                         
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
+                        <% if (!user) { %>
+                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin"> 
+                            <!--if user is not logged in, display the plus icon without an onclick to add items to cart -->
+                            <% } else { %>
+                                <!-- else if user is logged in display the plus icon with an onclick to add items to cart -->
+                                <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                                <% } %>
+    
+                                <div class="incr-decr-product-quantity">
+                                    <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                    <div class="food-quantity">1</div>
+                                    <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                                </div>
+                                
                     </div>
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div>Chicken Rolls</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                    
+                    <div class="dishes-1-cont">
+                        <div class="dishes-1-grp-2">
+                            <div><%= food.title %></div>
+                            <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+                        </div>
+                        <p><%= food.description %></p>
+                        <div class="price-tag">$<%= food.price %></div>
                     </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$21</div>
                 </div>
-            </div>
-
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_8.png" alt="food-1" class="dishes-img">
-
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                    </div>
-
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div>Veg Rolls</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$19</div>
-                </div>
-            </div>
-
-            <div class="all-dishes">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/frontend_assets/food_1.png" alt="food-1" class="dishes-img">
-
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                    </div>
-                
-                <div class="dishes-1-cont greek-salad">
-                    <div class="dishes-1-grp-2">
-                        <div>Greek Salad</div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Vero ex</p>
-                    <div class="price-tag">$12</div>
-                </div>
-            </div>
+                <%  }) %>
+                <% } %>
+                <!-- first food code ends here -->
             
     </section>
 
@@ -432,6 +282,28 @@
         // display the dot icon on the basket icon 
         // to indicate a food has been added to cart
     }
+</script>
+
+<script>
+    // fetch() to send food data and update the cart DOM dynamically.
+
+    document.querySelectorAll('.add_icon_white').forEach(btn => {
+        btn.addEventListener('click', async (event) => {
+            const dish = event.target.closest('.dishes-1-grp-1');
+            const foodId = dish.dataset.id; // assign food ID to data-id
+            const quantity = 1;
+
+            const res = await fetch('/add-to-cart', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ foodId, quantity })
+            });
+
+            const cartData = await res.json();
+            updateCartUI(cartData); // You’ll write this to update the cart without reloading
+        });
+        });
+
 </script>
 
 <script>

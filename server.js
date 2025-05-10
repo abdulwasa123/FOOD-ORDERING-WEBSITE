@@ -24,6 +24,7 @@ app.use(authMiddleware); // 👈 This sets res.locals.user on every request if u
 app.use("/", require("./routes/foodRoute"));
 app.use("/", require("./routes/registerRoute"));
 app.use("/", require("./routes/loginRoute"));
+app.use("/", require("./routes/cartRoute"));
 
 app.listen(PORT, ()=> {
     connectDB();
