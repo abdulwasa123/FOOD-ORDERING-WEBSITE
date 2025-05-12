@@ -1,4 +1,6 @@
 const Food = require("../models/food");
+const Cart = require("../models/cartModel");
+
 const renderHomePage = async (req, res) => {
     try {
         // Find all posts, sorted by newest, and populate user info for post association
@@ -11,9 +13,28 @@ const renderHomePage = async (req, res) => {
     }
      };
 
-     const renderCartPage = (req, res) => {
-        res.render("cart.ejs", { query: req.query, user: req.user }); // Render the cart page
+    //  const renderCartPage = (req, res) => {
+    //     res.render("cart.ejs", { query: req.query, user: req.user }); // Render the cart page
+    // };
+
+
+    const renderCartPage = async (req, res) => {
+      try {
+        const cart = await Cart.findOne({ userId: req.user._id }).populate("items.foodId");
+
+        if (!cart) {
+          return res.render("cart.ejs", { cart: { items: [] }, subtotal: 0 });
+        }
+
+        const subtotal = cart.items.reduce((acc, item) => acc + item.total, 0);
+
+        res.render("cart.ejs", { cart, subtotal });
+      } catch (err) {
+        console.error("Error loading cart page:", err);
+        res.status(500).send("Server error");
+      }
     };
+
 
     const renderOrderPage = (req, res) => {
         res.render("order.ejs", { query: req.query, user: req.user }); // Render the order page

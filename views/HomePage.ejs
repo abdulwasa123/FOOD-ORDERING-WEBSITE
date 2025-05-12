@@ -184,7 +184,7 @@
 
             <!-- else, if the user is logged in, u can order -->
             <% } else { %>
-                <% foods.forEach(function(food) { %> <!-- create a new post and not let the previous one overrite the newer one -->
+                <% foods.forEach(function(food) { %> <!-- create a new food and not let the previous one overrite the newer one -->
                 <div class="all-dishes">
                     <div class="dishes-1-grp-1 dishes-1-grp-all">
                         <img src="/images/<%= food._id %>" alt="food-1" class="dishes-img">
@@ -194,14 +194,23 @@
                             <!--if user is not logged in, display the plus icon without an onclick to add items to cart -->
                             <% } else { %>
                                 <!-- else if user is logged in display the plus icon with an onclick to add items to cart -->
-                                <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
+                                <img 
+                                    src="/images/frontend_assets/add_icon_white.png" 
+                                    alt="add_icon_white" 
+                                    class="add_icon_white" 
+                                    data-id="<%= food._id %>" 
+                                    data-title="<%= food.title %>" 
+                                    data-price="<%= food.price %>" 
+                                    onclick="showIncr_decr_product_quantity(event)">
                                 <% } %>
     
                                 <div class="incr-decr-product-quantity">
-                                    <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
+                                    <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red" data-id="<%= food._id %>">
                                     <div class="food-quantity">1</div>
-                                    <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
+                                    <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green" data-id="<%= food._id %>">
                                 </div>
+                                
+                                  
                                 
                     </div>
                     
@@ -271,40 +280,101 @@
 
 <script>
       function showIncr_decr_product_quantity(event) {
-        const container = event.target.closest(".dishes-1-grp-1");
-        const incrDecr = container.querySelector(".incr-decr-product-quantity");
-        const addIcon = container.querySelector(".add_icon_white");
+    const container = event.target.closest(".dishes-1-grp-1");
+    const incrDecr = container.querySelector(".incr-decr-product-quantity");
+    const addIcon = container.querySelector(".add_icon_white");
 
-        incrDecr.style.display = "flex";
-        addIcon.style.display = "none";
+    // Show quantity UI, hide plus icon
+    incrDecr.style.display = "flex";
+    addIcon.style.display = "none";
+
+    // Extract food data from the clicked image
+    const foodId = event.target.dataset.id;
+    const title = event.target.dataset.title;
+    const price = event.target.dataset.price;
+
+    // Debug log
+    console.log("Adding to cart:", { foodId, title, price });
+
+    // Send data to server
+    fetch("/cart/add", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+            foodId: foodId,  // example: "662f9a..."
+            title: title,
+            price: price,
+            quantity: 1 })
+            })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Server response:", data);
+    })
+    .catch(error => {
+        console.error("Error adding to cart:", error);
+    });
+}
 
         document.getElementById("dot-icon").style.display = "flex" 
         // display the dot icon on the basket icon 
         // to indicate a food has been added to cart
-    }
 </script>
+
 
 <script>
-    // fetch() to send food data and update the cart DOM dynamically.
-
-    document.querySelectorAll('.add_icon_white').forEach(btn => {
-        btn.addEventListener('click', async (event) => {
-            const dish = event.target.closest('.dishes-1-grp-1');
-            const foodId = dish.dataset.id; // assign food ID to data-id
-            const quantity = 1;
-
-            const res = await fetch('/add-to-cart', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ foodId, quantity })
+    
+    document.addEventListener("DOMContentLoaded", () => {
+    // Increase quantity
+    document.querySelectorAll(".add_icon_green").forEach(button => {
+        button.addEventListener("click", function () {
+            const foodId = this.dataset.id;
+            fetch("/cart/increase", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ foodId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Increased:", data);
+                // Optional: Update quantity on page
+            })
+            .catch(err => {
+                console.error("Error increasing quantity.", err);
             });
+        });
+    });
 
-            const cartData = await res.json();
-            updateCartUI(cartData); // You’ll write this to update the cart without reloading
+    // Decrease quantity
+    document.querySelectorAll(".remove_icon_red").forEach(button => {
+        button.addEventListener("click", function () {
+            const foodId = this.dataset.id;
+            fetch("/cart/decrease", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ foodId })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log("Decreased:", data);
+                // Optional: Update quantity on page
+            })
+            .catch(err => {
+                console.error("Error decreasing quantity.", err);
+            });
         });
-        });
+    });
+});
+
 
 </script>
+    
+  
 
 <script>
     document.querySelectorAll(".incr-decr-product-quantity").forEach((container) => {

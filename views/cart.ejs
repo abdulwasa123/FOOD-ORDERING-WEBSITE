@@ -1,95 +1,108 @@
 <%- include("partials/header.ejs") %>
 
+<link rel="stylesheet" href="/styles/green-toast.css">
 
-<div class="cart-product-container">
-    <img src="/images/frontend_assets/food_1.png" alt="food_1">
+<!-- toast hidden by default until triggered -->
+<div id="toast" class="toast" style="display: none;">
+    <span class="icon">✅</span>
+    <span class="message">Removed From Cart</span>
+    <span class="close" onclick="closeToast()">&times;</span>
+    <div class="progress"></div>
+  </div>
 
-    <div class="cart-prod">
-        <div class="prod-title">
-            <div>Title:</div>
-            <div>Greek Salad</div>
-        </div>
-
-        <div class="prod-price">
-            <div>Price:</div>
-            <div>$12</div>
-        </div>
-    
-        <div class="prod-quantity">
-            <div>Quantity:</div>
-            <div>2</div>
-        </div>
-    
-        <div class="prod-total">
-            <div>Total:</div>
-            <div>$21</div>
-        </div>
-
-        <div class="remove-prod">
-            <div>Remove</div>
-            <div>x</div>
-        </div>
+  <% if (!cart || cart.items.length === 0) { %>
+    <div class="empty-cart-message">
+      <p>Your cart is empty. You have no items currently in your cart.</p>
+      <a href="/">← Continue shopping</a>
     </div>
-
-</div>
-
-<hr>
-
-<div class="cart-totals">
-
-    <div>Cart Totals</div>
-
-        <div class="prod-subtotal">
-            <div>Subtotal</div>
-            <div>$20</div>
-        </div>
-    <hr>
-        <div class="prod-delivery-fee">
-            <div>Delivery Fee</div>
-            <div>$3</div>
-        </div>
-    <hr>
-        <div class="cart-total">
-            <div>Total</div>
-            <div>$23</div>
-        </div>
-
-        <a href="/order">
-            <button type="submit" value="Submit">PROCEED TO CHECKOUT</button>
-        </a>
-        
-</div>
-
-<%- include("partials/footer.ejs") %>
-
-<script>
-function updateCartUI(cart) {
-  const cartContainer = document.querySelector('.cart-product-container');
-  cartContainer.innerHTML = ''; // Clear existing
-
-  cart.items.forEach(item => {
-    const html = `
+  <% } else { %>
+    <% cart.items.forEach(item => { %>
       <div class="cart-product-container">
-        <img src="${item.foodId.image}" alt="food">
+        <img src="/images/<%= item.foodId._id %>" alt="<%= item.foodId.title %>">
+    
         <div class="cart-prod">
-            <div class="prod-title"><div>Title:</div><div>${item.foodId.title}</div></div>
-            <div class="prod-price"><div>Price:</div><div>$${item.foodId.price}</div></div>
-            <div class="prod-quantity"><div>Quantity:</div><div>${item.quantity}</div></div>
-            <div class="prod-total"><div>Total:</div><div>$${item.total}</div></div>
-            <div class="remove-prod"><div>Remove</div><div>x</div></div>
+            <div class="prod-title">
+                <div>Title:</div>
+                <div><%= item.foodId.title %></div>
+            </div>
+    
+            <div class="prod-price">
+                <div>Price:</div>
+                <div>$<%= item.price %></div>
+            </div>
+    
+            <div class="prod-quantity">
+                <div>Quantity:</div>
+                <div><%= item.quantity %></div>
+            </div>
+    
+            <div class="prod-total">
+                <div>Total:</div>
+                <div>$<%= item.total %></div>
+            </div>
+    
+            <div class="remove-prod">
+              <div>Remove:</div>
+              <form action="/cart/delete/<%= item.foodId._id %>?_method=DELETE" method="POST">
+                  <input type="submit" value="x">
+              </form>
+            </div>
         </div>
       </div>
-    `;
-    cartContainer.insertAdjacentHTML('beforeend', html);
-  });
+      <hr>
+    <% }) %>
+  
+    <div class="cart-totals">
+      <div>Cart Totals</div>
+  
+      <div class="prod-subtotal">
+          <div>Subtotal</div>
+          <div>$<%= subtotal %></div>
+      </div>
+      <hr>
+      <div class="prod-delivery-fee">
+          <div>Delivery Fee</div>
+          <div>$3</div>
+      </div>
+      <hr>
+      <div class="cart-total">
+          <div>Total</div>
+          <div>$<%= subtotal + 3 %></div>
+      </div>
+  
+      <a href="/order">
+          <button type="submit">PROCEED TO CHECKOUT</button>
+      </a>
+    </div>
+  <% } %>
+  
 
-  // Update subtotal and total
-  const subtotal = cart.items.reduce((sum, item) => sum + item.total, 0);
-  document.querySelector('.prod-subtotal div:last-child').textContent = `$${subtotal}`;
-  document.querySelector('.cart-total div:last-child').textContent = `$${subtotal + 3}`;
-}
-
-</script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+  
+    if (params.has('productDeleted')) {
+        showToast("Removed From Cart");
+    }
+  
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.querySelector(".message").textContent = message;
+        toast.style.display = "flex";
+  
+        const progress = toast.querySelector(".progress");
+        progress.style.animation = "none";
+        void progress.offsetWidth; // Restart animation
+        progress.style.animation = "progressBar 3s linear forwards";
+  
+        setTimeout(() => {
+        toast.style.display = "none";
+        }, 3000);
+    }
+  
+    function closeToast() {
+        document.getElementById("toast").style.display = "none";
+    }  
+  </script>
 
 <script src="/javascripts/drop_down_menu.js"></script>
 
