@@ -11,6 +11,8 @@ router.post("/cart/decrease", authMiddleware, cartController.decreaseQuantity);
 
 router.delete("/cart/delete/:id", authMiddleware, cartController.deleteFromCart);
 
+router.post("/create-checkout-session", authMiddleware, cartController.createCheckoutSession);
+
 
 module.exports = router;
   
