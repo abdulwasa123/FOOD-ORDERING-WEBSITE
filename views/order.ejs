@@ -23,7 +23,15 @@
         
             <div class="zipCodeAndCountry">
                 <input type="number" name="zipcode" id="zipcode" placeholder="Zip code" required>
-                <input type="text" placeholder="Country" id="country" name="country" required>
+
+                <input list="countryList" placeholder="Country" id="country" name="country" required>
+                <datalist id="countryList">
+                    <option value="Nigeria">
+                    <option value="United States">
+                    <option value="United Kingdom">
+                    <option value="Canada">
+                    <option value="India">
+                </datalist> 
             </div>
         
             <input type="number" name="phone" id="phone" placeholder="Phone" required>
@@ -88,18 +96,16 @@
       const deliveryForm = document.querySelector('.delivery-information form');
   
       checkoutForm.addEventListener('submit', function (e) {
-        // Copy all delivery inputs
-        const fields = ['firstName', 'lastName', 'email', 'street', 'city', 'state', 'zipcode', 'country', 'phone'];
-
-        for (const name of fields) {
-            const value = deliveryForm.querySelector(`[name="${name}"]`).value;
-            if (!value) {
-                e.preventDefault();
-                showToast('Please fill out all delivery fields.');
-                return;
-            }
+        // Check built-in validation for all delivery fields
+        if (!deliveryForm.checkValidity()) {
+          e.preventDefault(); // prevent form from submitting
+          deliveryForm.reportValidity(); // show native HTML validation errors
+          return;
         }
-
+  
+        // Copy fields into checkout form if valid
+        const fields = ['firstName', 'lastName', 'email', 'street', 'city', 'state', 'zipcode', 'country', 'phone'];
+  
         fields.forEach(name => {
           const value = deliveryForm.querySelector(`[name="${name}"]`).value;
           const hiddenInput = document.createElement('input');
