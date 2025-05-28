@@ -1,7 +1,6 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Order = require('../models/orderModel');
 const Cart = require('../models/cartModel');
-const Food = require('../models/food');
 
 exports.checkout = async (req, res) => {
   const userId = req.user._id;
@@ -66,13 +65,14 @@ exports.orderSuccess = async (req, res) => {
     const order = new Order({
       user : req.user._id,
       items: cart.items.map(it => ({
-        food     : it.foodId._id,
-        quantity : it.quantity,
-        price    : it.foodId.price
+      food : it.foodId._id,
+      quantity : it.quantity,
+      price: it.foodId.price
       })),
       totalAmount : session.amount_total / 100,
       deliveryInfo: req.session.deliveryInfo,   // <-- here
-      status      : 'Food Processing'
+      status : 'Food Processing',
+      sessionId: session.id,
     });
     await order.save();
 

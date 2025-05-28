@@ -482,6 +482,9 @@ form > input:focus{
     outline: none;
     border: 1px solid rgb(253, 75, 10);
 }
+.sign-up-container input{
+    font-family: sans-serif;
+}
 form > button{
     color: #ffffff;
     background-color: rgb(253, 75, 10);
