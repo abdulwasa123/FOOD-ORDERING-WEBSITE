@@ -13,6 +13,7 @@
 }
 
 .delivery-information form{
+    display: flex;
     width: 100%;
 }
 #delivery-info-header{

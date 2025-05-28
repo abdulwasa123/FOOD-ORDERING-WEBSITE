@@ -1,15 +1,15 @@
 .position-ordered-prod-conatiner{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     max-width: 1200px;
     padding: 20px 20px;
     margin: 0 auto;
     margin-top: 1.5rem;
+    
+    padding-right: 3rem;
 }
-#myOrdersText{
-    margin-bottom: 1.5rem;
-    font-size: 21px;
-    font-family: "facundo-bold";
-}
-.ordered-prod-conatiner{
+.ordered-prod-conatiner {
     display: flex;
     align-items: center;
     width: 100%;
@@ -18,29 +18,53 @@
     border: 1px solid rgb(137, 137, 137);
     font-family: "facundo-regular";
     font-size: 13px;
-}
-.ordered-prod-conatiner input{
-    width: 8rem;
-    height: 2.1rem;
-    border-radius: 0.15rem;
-    border: none;
-    font-family: "facundo-regular";
-    font-size: 13px;
-    cursor: pointer;
-    background-color: rgb(255, 222, 228);
-}
-#parcel-icon{
+    gap: 1rem;
+  }
+  
+  .order-icon,
+  .order-items,
+  .order-amount,
+  .order-count,
+  .del-status-cont {
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .order-items {
+    flex: 2;
+  }
+  
+  #parcel-icon {
     width: 3rem;
-}
-
-@media (max-width: 768px) {
-    .ordered-prod-conatiner{
-        justify-content: flex-start;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
-        border: none;
+  }
+  
+  .del-status-cont {
+    display: flex;
+    gap: 0.2rem;
+  }
+  
+  .del-status-cont img {
+    width: 9px;
+    height: 9px;
+    margin-top: 0.25rem;
+  }
+  
+  @media (max-width: 768px) {
+    .ordered-prod-conatiner {
+      flex-direction: column;
+      align-items: flex-start;
     }
-}
+  
+    .order-icon,
+    .order-items,
+    .order-amount,
+    .order-count,
+    .del-status-cont {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+  

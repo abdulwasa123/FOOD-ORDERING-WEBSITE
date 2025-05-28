@@ -1,10 +1,5 @@
 const User = require("../models/userModel"); // Import User model
 
-// Route to render the register page
-// const renderRegisterPage = (req, res) => {
-//     res.render("RegisterPage.ejs"); // Render the register page
-// };
-
 // Register a new user
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -34,6 +29,5 @@ const registerUser = async (req, res) => {
 };
 
 module.exports = {
-    // renderRegisterPage,   // Render register page
-    registerUser,         // Register user route
+    registerUser,    // Register user route
 };

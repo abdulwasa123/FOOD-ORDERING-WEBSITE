@@ -4,7 +4,7 @@
     
     <div class="delivery-information">
 
-        <form action="/" method="post">
+        <form action="/checkout" method="post">
     
             <div id="delivery-info-header">Delivery Information</div>
     
@@ -38,7 +38,7 @@
     
             <div class="prod-subtotal">
                 <div>Subtotal</div>
-                <div>$20</div>
+                <div>$<%= subtotal %></div>
             </div>
         <hr>
             <div class="prod-delivery-fee">
@@ -47,11 +47,11 @@
             </div>
         <hr>
             <div class="cart-total">
-                <div>Total</div>
-                <div>$23</div>
+                <div><b>Total</b></div>
+                <div><b>$<%= subtotal + 3 %></b></div>
             </div>
     
-            <form action="/create-checkout-session" method="POST">
+            <form action="/checkout" method="POST">
                 <button type="submit" value="Submit">Proceed To Payment</button>
             </form>
             
@@ -59,9 +59,74 @@
 
 </div>
 
+<div id="toast" style="
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f44336;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    font-size: 1rem;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+"></div>
+<!-- alert toast code which is triggered when del info is not entered -->
+
+
 <%- include("partials/footer.ejs") %>
 
 <script src="/javascripts/drop_down_menu.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const checkoutForm = document.querySelector('.cart-totals form');
+      const deliveryForm = document.querySelector('.delivery-information form');
+  
+      checkoutForm.addEventListener('submit', function (e) {
+        // Copy all delivery inputs
+        const fields = ['firstName', 'lastName', 'email', 'street', 'city', 'state', 'zipcode', 'country', 'phone'];
+
+        for (const name of fields) {
+            const value = deliveryForm.querySelector(`[name="${name}"]`).value;
+            if (!value) {
+                e.preventDefault();
+                showToast('Please fill out all delivery fields.');
+                return;
+            }
+        }
+
+        fields.forEach(name => {
+          const value = deliveryForm.querySelector(`[name="${name}"]`).value;
+          const hiddenInput = document.createElement('input');
+          hiddenInput.type = 'hidden';
+          hiddenInput.name = name;
+          hiddenInput.value = value;
+          checkoutForm.appendChild(hiddenInput);
+        });
+      });
+    });
+  </script>
+  
+  <script>
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.style.display = "block";
+        toast.style.opacity = "1";
+
+        setTimeout(() => {
+            toast.style.opacity = "0";
+            setTimeout(() => {
+                toast.style.display = "none";
+            }, 300);
+        }, 3000);
+    }
+</script>
 
 </body>
 

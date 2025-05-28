@@ -22,7 +22,7 @@ image: {
 contentType: { 
     type: String, 
     required: true 
-}
+},
 });
 
 module.exports = mongoose.model('Food', foodSchema);

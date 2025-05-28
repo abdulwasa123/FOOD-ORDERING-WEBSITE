@@ -1,5 +1,6 @@
 const Food = require("../models/food");
 const Cart = require("../models/cartModel");
+const Order = require("../models/orderModel");
 
 const renderHomePage = async (req, res) => {
     try {
@@ -12,10 +13,6 @@ const renderHomePage = async (req, res) => {
         res.status(500).send("Error fetching posts.");
     }
      };
-
-    //  const renderCartPage = (req, res) => {
-    //     res.render("cart.ejs", { query: req.query, user: req.user }); // Render the cart page
-    // };
 
 
     const renderCartPage = async (req, res) => {
@@ -36,12 +33,28 @@ const renderHomePage = async (req, res) => {
     };
 
 
-    const renderOrderPage = (req, res) => {
-        res.render("order.ejs", { query: req.query, user: req.user }); // Render the order page
+    const renderOrderPage = async (req, res) => {
+      try {
+        const cart = await Cart.findOne({ userId: req.user._id }).populate("items.foodId");
+
+        if (!cart) {
+          return res.render("order.ejs", { cart: { items: [] }, subtotal: 0 });
+        }
+
+        const subtotal = cart.items.reduce((acc, item) => acc + item.total, 0);
+
+        res.render("order.ejs", { cart, subtotal });
+      } catch (err) {
+        console.error("Error loading cart page:", err);
+        res.status(500).send("Server error");
+      }
     };
 
-    const rendermyOrdersPage = (req, res) => {
-        res.render("myOrders.ejs", { query: req.query, user: req.user }); // Render the myOrders page
+    const rendermyOrdersPage = async (req, res) => {
+      const orders = await Order
+        .find({ user: req.user._id })
+        .populate('items.food');   // <-- use .food, not .foodId
+      res.render('myOrders.ejs', { orders });
     };
     
     // display images
@@ -57,12 +70,12 @@ const renderHomePage = async (req, res) => {
                 } catch (err) {
                   res.status(500).send('Error fetching image');
                 }
-        };
+        };      
       
 module.exports = {
     renderHomePage,
     renderCartPage,
     renderOrderPage,
     rendermyOrdersPage,
-    getImages,
+    getImages,  
 };

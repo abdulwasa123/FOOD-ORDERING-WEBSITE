@@ -284,6 +284,7 @@ header{
 }
 
 .price-tag{
+    font-size: 22px;
     padding-left: 1rem;
     color: orangered;
     margin-bottom: 1.5rem;
@@ -387,13 +388,11 @@ footer > div:first-child{
 }
 #overlay-text{
     display: none;
-    /* font-family: 'facundo-regular'; */
 }
 #order-text{
     font-family: 'facundo-semi-bold';
 }
 .all-dishes{
-    /* box-shadow: 1px 1px 20px 1px rgb(254, 253, 253); */
     transition: all 0.3s ease;
 }
 .all-dishes:hover{
@@ -478,9 +477,7 @@ form > input, button{
     caret-color: rgb(253, 75, 10);
     cursor: pointer;
 }
-/* form::placeholder{
-    color: black;
-} */
+
 form > input:focus{
     outline: none;
     border: 1px solid rgb(253, 75, 10);
@@ -531,11 +528,16 @@ form a{
     position: absolute;
     margin-top: 10.7rem;
     margin-left: 11.3rem;
+    font-family:sans-serif;
 }
 .incr-decr-product-quantity img{
     width: 2rem;
     height: 2rem;
 }
+
+.num {
+    font-family:sans-serif !important;
+  }
 
 @media (min-width: 375px) {
     .right-nav{

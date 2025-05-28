@@ -1,7 +1,4 @@
-const Food = require("../models/food");
 const Cart = require("../models/cartModel");
-
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // POST /add-to-cart
 const addToCart = async (req, res) => {
@@ -105,53 +102,10 @@ const deleteFromCart = async (req, res) => {
   }
 };
 
-// create checkout session (integrate stripe)
-
-const createCheckoutSession = async (req, res) => {
-  const cart = await Cart.findOne({ userId: req.user._id }).populate("items.foodId");
-
-  if (!cart || cart.items.length === 0) {
-    return res.status(400).send("Cart is empty.");
-  }
-
-  const lineItems = cart.items.map(item => ({
-    price_data: {
-      currency: "usd",
-      product_data: {
-        name: item.foodId.title,
-      },
-      unit_amount: item.price * 100, // Stripe uses cents
-    },
-    quantity: item.quantity,
-  }));
-
-  lineItems.push({
-    price_data: {
-      currency: "usd",
-      product_data: {
-        name: "Delivery Fee",
-      },
-      unit_amount: 300, // $3 delivery fee
-    },
-    quantity: 1,
-  });
-
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    mode: "payment",
-    line_items: lineItems,
-    success_url: "http://localhost:5000/myOrders",
-    cancel_url: "http://localhost:5000/cart",
-    customer_email: req.user.email,
-  });
-
-  res.redirect(303, session.url);
-};
-
 module.exports = {
     addToCart,
     increaseQuantity,
     decreaseQuantity,
     deleteFromCart,
-    createCheckoutSession,
+    // createCheckoutSession,
 };

@@ -1,6 +1,3 @@
-// this middleware makes the my posts page have authorization to delete and edit/update posts 
-// it also makes the homepage able use the user.username 
-
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 

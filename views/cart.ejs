@@ -66,8 +66,8 @@
       </div>
       <hr>
       <div class="cart-total">
-          <div>Total</div>
-          <div>$<%= subtotal + 3 %></div>
+        <div><b>Total</b></div>
+        <div><b>$<%= subtotal + 3 %></b></div>
       </div>
   
       <a href="/order">
@@ -103,6 +103,8 @@
         document.getElementById("toast").style.display = "none";
     }  
   </script>
+
+<%- include("partials/footer.ejs") %>
 
 <script src="/javascripts/drop_down_menu.js"></script>
 

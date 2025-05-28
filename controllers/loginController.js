@@ -47,7 +47,6 @@ const logoutUser = (req, res) => {
 };
 
 module.exports = {
-    // renderLoginPage,      // Render login page
     loginUser,            // Login user route
     logoutUser            // Logout route
 };
