@@ -41,12 +41,14 @@ exports.checkout = async (req, res) => {
     quantity: 1
   });
 
-  const sessionStripe = await stripe.checkout.sessions.create({
+    const BASE_URL = process.env.BASE_URL || "http://localhost:5000";
+
+    const sessionStripe = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
-    line_items : lineItems,
-    mode       : 'payment',
-    success_url: "http://localhost:5000/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url : "http://localhost:5000/cart",
+    line_items: lineItems,
+    mode: 'payment',
+    success_url: `${BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${BASE_URL}/cart`,
     customer_email: req.body.email
   });
 
