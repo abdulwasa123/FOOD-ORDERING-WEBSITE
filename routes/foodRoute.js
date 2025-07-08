@@ -8,6 +8,8 @@ router.get("/cart", ensureAuthenticated, foodController.renderCartPage);
 router.get("/order", ensureAuthenticated, foodController.renderOrderPage);
 router.get("/myOrders", ensureAuthenticated, foodController.rendermyOrdersPage);
 
+router.get('/surprise', foodController.getRandomFoodItem);
+  
 router.get('/images/:id', foodController.getImages);
 
 module.exports = router;

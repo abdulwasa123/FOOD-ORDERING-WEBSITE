@@ -144,45 +144,12 @@
 
 
             <!-- first food code starts here -->
-
-            <!-- what i did here is that when the user is not logged in,
-              when u click on a food it shows the signin popup
-               (because the user must be logged in to order for food) -->
-             <% if (!user) { %>
-                <% foods.forEach(function(food) { %> <!-- create a new post and not let the previous one overrite the newer one -->
-            <div class="all-dishes" onclick="openPopup()">
-                <div class="dishes-1-grp-1 dishes-1-grp-all">
-                    <img src="/images/<%= food._id %>" alt="food-1" class="dishes-img">
-                    
-                    <% if (!user) { %>
-                        <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin">
-                        <% } else { %>
-                            <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white" onclick="showIncr_decr_product_quantity(event)">
-                            <% } %>
-
-                            <div class="incr-decr-product-quantity">
-                                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red">
-                                <div class="food-quantity">1</div>
-                                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green">
-                            </div>
-                            
-                </div>
-                
-                <div class="dishes-1-cont">
-                    <div class="dishes-1-grp-2">
-                        <div><%= food.title %></div>
-                        <img src="/images/frontend_assets/rating_starts.png" alt="rating">
-                    </div>
-                    <p><%= food.description %></p>
-                    <div class="price-tag">$<%= food.price %></div>
-                </div>
-            </div>
-            <%  }) %>
-
-            <!-- else, if the user is logged in, u can order -->
-            <% } else { %>
                 <% foods.forEach(function(food) { %> <!-- create a new food and not let the previous one overrite the newer one -->
-                <div class="all-dishes">
+                    <div 
+                    class="all-dishes" 
+                    <% if (!user) { %> onclick="openPopup()" <% } %>
+                    >
+
                     <div class="dishes-1-grp-1 dishes-1-grp-all">
                         <img src="/images/<%= food._id %>" alt="food-1" class="dishes-img">
                         
@@ -219,10 +186,19 @@
                     </div>
                 </div>
                 <%  }) %>
-                <% } %>
                 <!-- first food code ends here -->
             
     </section>
+      
+      <div class="surprise-card">
+        <h2>Don't know what to eat? 🤔</h2>
+        <p>Let us surprise you with something tasty!</p>
+        <button onclick="location.href='/surprise'" class="surprise-btn">
+          🎲 Surprise Me
+        </button>
+      </div>
+      
+    
 
     <div class="app-promo">
         <div>For Better Experience Download<br>Tomato App</div>

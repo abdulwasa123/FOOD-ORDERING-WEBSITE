@@ -1,0 +1,265 @@
+<%- include('partials/header') %>
+<link rel="stylesheet" href="/styles/surprise.css">
+
+
+<!-- sign up pop up hidden by default -->
+<div class="position-sign-up-cont" id="sign-up-container">
+  <div class="sign-up-container" id="sign-up-container">
+      <form action="/signup" method="post">
+          <div class="grp">
+              <div>Sign Up</div>
+              <div>
+                  <img src="/images/frontend_assets/cross_icon.png" onclick="closePopup()" alt="close-icon">
+              </div>
+          </div>
+
+          <input type="text" placeholder="Your name" id="name" name="name" required>
+          <input type="email" placeholder="Your Email" id="email" name="email" required>
+          <input type="password" placeholder="Password" id="password" name="password" required>
+          <button type="submit" value="Submit">Create account</button>
+          <div class="checkbox-cont">
+              <input type="checkbox" id="checkbox" required="true">
+              <div>By continuing, i agree to the terms of use and privacy policy</div>
+          </div>
+          <div>Already have an account? <a onclick="showLoginPage()">Login here</a></div>
+      </form>
+   </div>
+</div>
+
+<!-- login-page -->
+<div class="position-sign-up-cont" id="log-in-container">
+  <div class="sign-up-container log-in-cont" id="log-in-container">
+      <form action="/login" method="post">
+          <div class="grp">
+              <div>Login</div>
+              <div>
+                  <img src="/images/frontend_assets/cross_icon.png" onclick="closePopup()" alt="close-icon">
+              </div>
+          </div>
+
+          <input type="email" placeholder="Your Email" id="email" name="email" required>
+          <input type="password" placeholder="Password" id="password" name="password" required>
+          <button type="submit" value="Submit" id="login-btn">Log in</button>
+          <div class="checkbox-cont">
+              <input type="checkbox" id="checkbox" required="true">
+              <div>By continuing, i agree to the terms of use and privacy policy</div>
+          </div>
+          <div>Sign up instead? <a onclick="showSignUpPage()">Sign Up</a></div>
+      </form>
+   </div>
+</div>
+<!-- sign up and login code ends here -->
+
+
+<div class="container">
+  <h1>Chef’s Random Pick for You! 👨‍🍳✨</h1>
+
+  <!-- Carousel Container -->
+  <div class="carousel-viewport">
+    <div class="carousel-track" id="carouselTrack">
+      <% meals.forEach(meal => { %>
+        <div class="carousel-card">
+          <div class="all-dishes">
+            <div class="dishes-1-grp-1 dishes-1-grp-all">
+              <img src="/images/<%= meal._id %>" alt="food-1" class="dishes-img" />
+      
+              <div class="incr-decr-product-quantity">
+                <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red" data-id="<%= meal._id %>">
+                <div class="food-quantity">1</div>
+                <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green" data-id="<%= meal._id %>">
+              </div>
+            </div>
+      
+            <div class="dishes-1-cont">
+              <div class="dishes-1-grp-2">
+                <div><%= meal.title %></div>
+              </div>
+              <p><%= meal.description %></p>
+              <div class="price-tag">₦<%= meal.price.toLocaleString() %></div>
+            </div>
+          </div>
+        </div>
+      <% }) %>      
+      
+    </div>
+  </div>
+  
+
+  <!-- Final Result -->
+  <div id="finalMealCard">
+    <div class="all-dishes" <% if (!user) { %> onclick="openPopup()" <% } %>>
+      <div class="dishes-1-grp-1 dishes-1-grp-all">
+        <img src="/images/<%= food._id %>" alt="food-1" class="dishes-img" />
+
+        <% if (!user) { %>
+          <img src="/images/frontend_assets/add_icon_white.png" alt="add_icon_white" class="add_icon_white_loggedin"> 
+        <% } else { %>
+          <img 
+            src="/images/frontend_assets/add_icon_white.png" 
+            alt="add_icon_white" 
+            class="add_icon_white" 
+            data-id="<%= food._id %>" 
+            data-title="<%= food.title %>" 
+            data-price="<%= food.price %>" 
+            onclick="showIncr_decr_product_quantity(event)">
+        <% } %>
+
+        <div class="incr-decr-product-quantity">
+          <img src="/images/frontend_assets/remove_icon_red.png" alt="remove_icon_red" class="remove_icon_red" data-id="<%= food._id %>">
+          <div class="food-quantity">1</div>
+          <img src="/images/frontend_assets/add_icon_green.png" alt="add_icon_green" class="add_icon_green" data-id="<%= food._id %>">
+        </div>
+      </div>
+
+      <div class="dishes-1-cont">
+        <div class="dishes-1-grp-2">
+          <div><%= food.title %></div>
+          <img src="/images/frontend_assets/rating_starts.png" alt="rating">
+        </div>
+        <p><%= food.description %></p>
+        <div class="price-tag">$<%= food.price %></div>
+      </div>
+    </div>
+  </div>
+
+  <a href="/surprise" class="surprise-btn" id="revealBtn" style="display: none;">🎲 Surprise Me Again</a>
+
+</div>
+
+
+<script>
+  window.onload = () => {
+    setTimeout(() => {
+      document.querySelector(".carousel-viewport").style.display = "none";
+      document.getElementById("finalMealCard").style.display = "block";
+      document.getElementById("revealBtn").style.display = "inline-block";
+    }, 7000);
+    document.getElementById("revealBtn").classList.add("show");
+  };
+</script>
+
+
+<%- include('partials/footer') %>
+
+<script>
+  function showIncr_decr_product_quantity(event) {
+const container = event.target.closest(".dishes-1-grp-1");
+const incrDecr = container.querySelector(".incr-decr-product-quantity");
+const addIcon = container.querySelector(".add_icon_white");
+
+// Show quantity UI, hide plus icon
+incrDecr.style.display = "flex";
+addIcon.style.display = "none";
+
+// Extract food data from the clicked image
+const foodId = event.target.dataset.id;
+const title = event.target.dataset.title;
+const price = event.target.dataset.price;
+
+// Debug log
+console.log("Adding to cart:", { foodId, title, price });
+
+// Send data to server
+fetch("/cart/add", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ 
+        foodId: foodId,  // example: "662f9a..."
+        title: title,
+        price: price,
+        quantity: 1 })
+        })
+.then(res => res.json())
+.then(data => {
+    console.log("Server response:", data);
+})
+.catch(error => {
+    console.error("Error adding to cart:", error);
+});
+}
+
+    document.getElementById("dot-icon").style.display = "flex" 
+    // display the dot icon on the basket icon 
+    // to indicate a food has been added to cart
+</script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+// Increase quantity
+document.querySelectorAll(".add_icon_green").forEach(button => {
+    button.addEventListener("click", function () {
+        const foodId = this.dataset.id;
+        fetch("/cart/increase", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ foodId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Increased:", data);
+            // Optional: Update quantity on page
+        })
+        .catch(err => {
+            console.error("Error increasing quantity.", err);
+        });
+    });
+});
+
+// Decrease quantity
+document.querySelectorAll(".remove_icon_red").forEach(button => {
+    button.addEventListener("click", function () {
+        const foodId = this.dataset.id;
+        fetch("/cart/decrease", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ foodId })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Decreased:", data);
+            // Optional: Update quantity on page
+        })
+        .catch(err => {
+            console.error("Error decreasing quantity.", err);
+        });
+    });
+});
+});
+
+
+</script>
+
+
+
+<script>
+document.querySelectorAll(".incr-decr-product-quantity").forEach((container) => {
+  const quantityEl = container.querySelector(".food-quantity");
+  const addBtn = container.querySelector(".add_icon_green");
+  const removeBtn = container.querySelector(".remove_icon_red");
+
+  addBtn.addEventListener("click", () => {
+    let quantity = parseInt(quantityEl.textContent);
+    quantity++;
+    quantityEl.textContent = quantity;
+  });
+
+  removeBtn.addEventListener("click", () => {
+    let quantity = parseInt(quantityEl.textContent);
+    if (quantity > 1) {
+      quantity--;
+      quantityEl.textContent = quantity;
+    }
+  });
+});
+</script>
+
+<script src="/javascripts/signin_popup.js"></script>
+<script src="/javascripts/drop_down_menu.js"></script>

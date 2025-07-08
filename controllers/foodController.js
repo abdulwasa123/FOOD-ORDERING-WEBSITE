@@ -56,6 +56,24 @@ const renderHomePage = async (req, res) => {
         .populate('items.food');   // <-- use .food, not .foodId
       res.render('myOrders.ejs', { orders });
     };
+
+
+    const getRandomFoodItem = async (req, res) => {
+      try {
+        const meals = await Food.aggregate([{ $sample: { size: 20 } }]);
+        const randomMeal = meals[Math.floor(Math.random() * meals.length)];
+    
+        res.render('surprise.ejs', {
+          meals,
+          food: randomMeal
+        });
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Something went wrong");
+      }
+    };
+    
+    
     
     // display images
           const getImages = async (req, res) => {
@@ -77,5 +95,6 @@ module.exports = {
     renderCartPage,
     renderOrderPage,
     rendermyOrdersPage,
+    getRandomFoodItem,
     getImages,  
 };

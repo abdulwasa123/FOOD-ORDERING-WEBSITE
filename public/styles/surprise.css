@@ -1,0 +1,101 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px 20px;
+}
+
+.all-dishes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+a{
+    text-decoration: none;
+}
+
+.surprise-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.surprise-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #ffb74d, #ff7043);
+}
+
+#revealBtn {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#revealBtn.show {
+  opacity: 1;
+}
+
+
+
+.carousel-viewport {
+  width: 350px;
+  height: 380px;
+  overflow: hidden;
+  margin: 40px auto;
+  position: relative;
+  /* border: 3px dashed #ffa000; */
+  border-radius: 12px;
+  /* background: #fff8e1; */
+}
+
+.carousel-track {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  animation: slideLeft 7s ease-out forwards;
+  animation-fill-mode: forwards; /* ← THIS is critical */
+}
+  .carousel-card {
+    min-width: 350px;
+    height: 380px;
+    padding: 15px;
+    background: #fff;
+    border-right: 1px solid #eee;
+    box-sizing: border-box;
+    flex: 0 0 350px;
+    box-sizing: border-box;
+    height: 100%;
+}
+  .carousel-card img {
+    width: 18rem;
+    max-height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+  }
+
+  @keyframes slideLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-7000px); }
+  }
+
+  #finalMealCard, #revealBtn {
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+.dishes-1-cont .price-tag, p{
+  text-align: left;
+}
+  
